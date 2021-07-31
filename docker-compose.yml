@@ -11,6 +11,7 @@ services:
             REDMINE_DB_PASSWORD: root
             REDMINE_DB_DATABASE: redmine_db
             REDMINE_SECRET_KEY_BASE: supersecretkey
+            TZ: Asia/Tokyo
         networks: 
             - redmine_net
     db:
@@ -20,8 +21,6 @@ services:
         environment: 
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: redmine_db
-        volumes: 
-            - ./db/data:/var/lib/mysql
         networks: 
             - redmine_net
 networks: 
