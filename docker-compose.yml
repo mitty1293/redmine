@@ -1,0 +1,27 @@
+version: "3.9"
+services: 
+    redmine:
+        image: redmine:4.2.1
+        container_name: redmine_app
+        restart: always
+        ports: 
+            - "8005:3000"
+        environment: 
+            REDMINE_DB_MYSQL: redmine_mariadb
+            REDMINE_DB_PASSWORD: root
+            REDMINE_DB_DATABASE: redmine_db
+            REDMINE_SECRET_KEY_BASE: supersecretkey
+        networks: 
+            - redmine_net
+    db:
+        image: mariadb:10.6.3-focal
+        container_name: redmine_mariadb
+        restart: always
+        environment: 
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: redmine_db
+        networks: 
+            - redmine_net
+networks: 
+    redmine_net:
+        driver: bridge
