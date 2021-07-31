@@ -20,6 +20,8 @@ services:
         environment: 
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: redmine_db
+        volumes: 
+            - ./db/data/:/var/lib/mysql/
         networks: 
             - redmine_net
 networks: 
