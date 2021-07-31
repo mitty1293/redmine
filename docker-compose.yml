@@ -7,20 +7,21 @@ services:
         ports: 
             - "8005:3000"
         environment: 
-            REDMINE_DB_MYSQL: redmine_mariadb
-            REDMINE_DB_PASSWORD: root
-            REDMINE_DB_DATABASE: redmine_db
+            REDMINE_DB_MYSQL: ${REDMINE_DB_MYSQL}
+            REDMINE_DB_PASSWORD: ${REDMINE_DB_PASSWORD}
+            REDMINE_DB_DATABASE: ${REDMINE_DB_DATABASE}
             REDMINE_SECRET_KEY_BASE: supersecretkey
-            TZ: Asia/Tokyo
+            TZ: ${TZ}
         networks: 
             - redmine_net
     db:
         image: mariadb:10.6.3-focal
-        container_name: redmine_mariadb
+        container_name: ${REDMINE_DB_MYSQL}
         restart: always
         environment: 
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: redmine_db
+            MYSQL_ROOT_PASSWORD: ${REDMINE_DB_PASSWORD}
+            MYSQL_DATABASE: ${REDMINE_DB_DATABASE}
+            TZ: ${TZ}
         networks: 
             - redmine_net
 networks: 
